@@ -7,12 +7,12 @@ variable "profile" {
 }
 
 variable "ami_id" {
-  default = "ami-0ac43988dfd31ab9a"
+  default = "ami-0152e9dc6c0a72570"
 }
 
 variable "ubuntu_ami_id" {
   type        = string
-  default     = "ami-0a8e758f5e873d1c1"
+  default     = "ami-004b5f5c0f04dba5d"
   description = "ubuntu ami id"
 }
 
