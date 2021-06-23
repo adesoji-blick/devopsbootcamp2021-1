@@ -47,7 +47,7 @@ module "ubuntu" {
   instance_type    = var.instance_type
   subnet_id        = data.terraform_remote_state.network.outputs.public_subnet_c_id
   main_sg_id       = data.terraform_remote_state.network.outputs.monitor_sg_id
-  bootstrap_script = var.installApp["monitoring"]
+  bootstrap_script = var.installApp["none"]
   name             = "ubuntu"
   environment      = "dev"
   role             = "admin"
