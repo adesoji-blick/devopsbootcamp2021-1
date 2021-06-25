@@ -6,14 +6,6 @@ variable "profile" {
   default = "default"
 }
 
-variable "ami_id" {
-}
-
-variable "ubuntu_ami_id" {
-
-}
-
-
 variable "instance_type" {
   default = "t2.micro"
 }

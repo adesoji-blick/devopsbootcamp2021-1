@@ -49,7 +49,6 @@ data "aws_ami" "ubuntu" {
 module "toolServer1" {
   source         = "../modules/ec2"
   instance_count = var.public_instance_count
-  # ami_id           = var.ami_id
   ami_id           = data.aws_ami.amazon-linux.id
   instance_type    = var.instance_type
   subnet_id        = data.terraform_remote_state.network.outputs.public_subnet_a_id
@@ -63,7 +62,6 @@ module "toolServer1" {
 module "toolServer2" {
   source         = "../modules/ec2"
   instance_count = var.public_instance_count
-  # ami_id           = var.ami_id
   ami_id           = data.aws_ami.amazon-linux.id
   instance_type    = var.instance_type
   subnet_id        = data.terraform_remote_state.network.outputs.public_subnet_b_id
@@ -77,7 +75,6 @@ module "toolServer2" {
 module "ubuntu" {
   source         = "../modules/ec2"
   instance_count = var.public_instance_count
-  # ami_id           = var.ubuntu_ami_id
   ami_id           = data.aws_ami.ubuntu.id
   instance_type    = var.instance_type
   subnet_id        = data.terraform_remote_state.network.outputs.public_subnet_c_id
