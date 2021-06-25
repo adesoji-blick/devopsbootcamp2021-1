@@ -16,5 +16,5 @@ packer build .
 ```
 To build all in the current directory
 
-## cd to dev/main and run 
+## cd to server/main and run 
 terraform apply -var-file=environments/dev.tfvars
