@@ -30,5 +30,9 @@ variable "public_instance_count" {
   default = 1
 }
 
+variable "public_ubuntu_count" {}
+
 variable "environment" {}
 variable "role" {}
+variable "toolServer" {}
+variable "ubuntuServer" {}

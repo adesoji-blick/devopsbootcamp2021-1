@@ -26,9 +26,4 @@ output "toolServer1_instance_public_ip" {
   #  depends_on  = []
 }
 
-output "toolServer2_instance_public_ip" {
-  value = module.toolServer2.instance_public_ip
-  #  sensitive   = true
-  description = "Public IP address of the EC2 instances"
-  #  depends_on  = []
-}
+

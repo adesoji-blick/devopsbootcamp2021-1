@@ -1,7 +1,9 @@
 region = "eu-west-1"
 profile = "default"
 instance_type = "t2.micro"
-private_instance_count = 1
-public_instance_count = 1
+public_ubuntu_count = 1
+public_instance_count = 2
 environment = "develoment"
 role = "super-user"
+toolServer = "toolServer"
+ubuntuServer = "ubuntuServer"
