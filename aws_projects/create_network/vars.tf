@@ -1,9 +1,21 @@
+# variable "profile" {
+#   default = "devop03"
+# }
+
+variable "region" {
+  default = "eu-west-1"
+}
+
 variable "tenancy" {
-  default="default"
+  type    = string
+  default = "default"
+  # description = "description"
 }
 
 variable "main_vpc_cidr_block" {
-    default="10.0.0.0/16"  
+  type    = string
+  default = "10.0.0.0/16"
+  # description = "description"
 }
 
 variable "public_subnet_a_cidr" {
@@ -26,11 +38,3 @@ variable "private_subnet_b_cidr" {
   default="10.0.32.0/20"
 }
 
-variable "availability_zone" {
-  type = map(string)
-  default = {
-      "az_a"  = "eu-west-1a"
-      "az_b"  = "eu-west-1b"
-      "az_c"  = "eu-west-1c"
-  }
-}
