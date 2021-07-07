@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+  - name: Install web server
+    yum:
+      name: httpd
+      state: present
+  - name: Restart web server
+    service:
+      name: httpd
+      state: started
+  - name: Open port 80 for http access
+    firewalld:
+      service: http
+      permanent: true
+      state: enabled
+  - name: Restart the firewall service to load in the firwewall changes
+    service:
+      name: firewalld
+      state: restarted
