@@ -3,13 +3,18 @@
   become: true
   gather_facts: no
   tasks:
-  - name: Install OpenJDK 11
-    shell: |
-      sudo yum update -y
-      sudo yum install httpd -y
-      sudo service httpd start
-  - name: Install sudo yum install java-11-openjdk-devel
-    command: sudo yum -y install java-11-openjdk-devel
+  - name: Update repos
+    yum:
+      name: "*"
+      state: latest
+  - name: Install Java JDK rpm from a local file
+    yum:
+      name: java-1.8.0-openjdk
+  - name: Setting default java
+    alternatives:
+      name: java
+      link: /usr/bin/java
+      path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.282.b08-1.amzn2.0.1.x86_64/jre/bin/java
 - hosts: node3
   become: true
   gather_facts: no
