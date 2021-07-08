@@ -3,20 +3,20 @@
   become: true
   gather_facts: no
   tasks:
-  - name: Install web server
-    yum:
-      name: httpd
-      state: present
-  - name: Restart web server
-    service:
-      name: httpd
-      state: started
-  - name: Open port 80 for http access
-    firewalld:
-      service: http
-      permanent: true
-      state: enabled
-  - name: Restart the firewall service to load in the firwewall changes
-    service:
-      name: firewalld
-      state: restarted
+  - name: Install OpenJDK 11
+    shell: |
+      sudo yum update -y
+      sudo yum install httpd -y
+      sudo service httpd start
+  - name: Install sudo yum install java-11-openjdk-devel
+    command: sudo yum -y install java-11-openjdk-devel
+  - name: Install Node from the EPEL Repository
+    shell: |
+      curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+      sudo yum install nodejs -y
+#  - name: Add node yum repository
+#    get_url:
+#      url: https://rpm.nodesource.com/setup_14.x
+#      dest: /home/ec2-user/
+#      mode: 0777
+
