@@ -7,9 +7,10 @@
     yum:
       name: "*"
       state: latest
-  - name: Install Java JDK rpm from a local file
+  - name: Install Java JDK 
     yum:
       name: java-1.8.0-openjdk
+      state: installed
   - name: Setting default java
     alternatives:
       name: java
@@ -22,10 +23,7 @@
   - name: Install Node from the EPEL Repository
     shell: |
       curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
-      sudo yum install nodejs -y
-#  - name: Add node yum repository
-#    get_url:
-#      url: https://rpm.nodesource.com/setup_14.x
-#      dest: /home/ec2-user/
-#      mode: 0777
-
+  - name: Install Node JS
+    yum:
+      name: nodejs
+      state: installed
