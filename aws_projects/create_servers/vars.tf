@@ -14,7 +14,7 @@ variable "installApp" {
   type = map(string)
   default = {
     "tools1"     = "../../scripts/install_tools1.sh"
-    "tools2"     = "../../scripts/install_tools2.sh"
+    "baseline"     = "../../scripts/install_baseline.sh"
     "nginx"      = "../../scripts/install_nginx.sh"
     "apache"     = "../../scripts/install_apache.sh"
     "monitoring" = "../../scripts/install_monitoring.sh"
@@ -31,8 +31,10 @@ variable "public_instance_count" {
 }
 
 variable "public_ubuntu_count" {}
+variable "web_instance_count" {}
 
 variable "environment" {}
 variable "role" {}
 variable "toolServer" {}
+variable "webServer" {}
 variable "ubuntuServer" {}

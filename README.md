@@ -18,3 +18,6 @@ To build all in the current directory
 
 ## cd to server/main and run 
 terraform apply -var-file=environments/dev.tfvars
+
+##
+ANSIBLE_HOST_CHECKING=False 
