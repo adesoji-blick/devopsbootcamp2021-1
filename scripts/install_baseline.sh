@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Add Toolserver public key to instances
-sudo echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpekiN5zu9srzy/x6tVtKBN6fD4gys26e2nm39a8BBIrWb0yU97Y4HtRXVYHACAjNu67uNjUMw/oeCRT27psL/Dp0lFGw4u6cUW6To8TrJ2TYKBFjVjsbS2FYK2sBho0lznG3lQhXGCqTWq088jkC5kBEiERtZz3ic6KyTA4twFCy6U/mR1hH52QX9WlcozjCpL3Pc+BM+ufsPP8/BQuUMBaBqUMpaoD3oOBIqJa7l/7DtD9QB8A1TpBjw1Soq4XuobyTTtB5PkJSnmUoukb23sZP3wtr7NMaWrOpt23FB++sinBLcUaxfn4zD81AtS878MSfM1F1U2JunaZzsa3Pt ec2-user@ip-10-0-0-165.eu-west-1.compute.internal' >> /home/ec2-user/.ssh/authorized_keys
