@@ -1,0 +1,6 @@
+[web]
+webserver ansible_host=3.249.165.170
+[apps]
+app      ansible_host=
+[db]
+databases  ansible_host=

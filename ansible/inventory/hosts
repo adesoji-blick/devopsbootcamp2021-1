@@ -1,4 +1,0 @@
-[node2]
-webserver ansible_host=34.253.197.203
-[node3]
-apps ansible_host=34.241.250.182

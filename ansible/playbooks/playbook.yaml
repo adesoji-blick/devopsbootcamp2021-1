@@ -7,7 +7,20 @@
       state: directory
     with_items: '{{ node_directories_to_create }}'
     #    mode: '0755'
-- hosts: node2
+  - name: Template file for welcome_message
+    become: true
+    ansible.builtin.template:
+      src: welcome_message.j2
+      dest: /etc/profile.d/welcome_message.sh
+      owner: root 
+      mode: '0644'
+  - name: Create configuration file for apps
+    ansible.builtin.template:
+      src: config.properties.j2
+      dest: /home/ec2-user/config/config.properties
+      mode: '0644'
+
+- hosts: webserver
   become: true
   gather_facts: no
   tasks:
@@ -15,16 +28,18 @@
     yum:
       name: "*"
       state: latest
-  - name: Install Java JDK 
+  - name: Install latest Java JDK and Git
     yum:
-      name: java-1.8.0-openjdk
+      name: "{{ item }}"
       state: installed
-  - name: Setting default java
-    alternatives:
-      name: java
-      link: /usr/bin/java
-      path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.282.b08-1.amzn2.0.1.x86_64/jre/bin/java
-- hosts: node3
+    loop: '{{ packages_to_install }}'
+#  - name: Setting default java
+#    alternatives:
+#      name: java
+#      link: /usr/bin/java
+#      path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.282.b08-1.amzn2.0.1.x86_64/jre/bin/java
+ 
+- hosts: apps 
   become: true
   gather_facts: no
   tasks:
@@ -35,3 +50,8 @@
     yum:
       name: nodejs
       state: installed
+  - name: Install latest Java JDK and Git
+    yum:
+      name: "{{ item }}"
+      state: installed
+    loop: '{{ packages_to_install }}'

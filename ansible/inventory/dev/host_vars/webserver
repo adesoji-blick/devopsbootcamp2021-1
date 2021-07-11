@@ -1,0 +1,9 @@
+node_directories_to_create:
+- /home/ec2-user/packages
+- /home/ec2-user/config
+- /home/ec2-user/web
+packages_to_install:
+- git
+- java-1.8.0-openjdk-devel-debug.x86_64
+node_type: webserver
+node_env: dev
