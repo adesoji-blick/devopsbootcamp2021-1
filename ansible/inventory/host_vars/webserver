@@ -1,0 +1,5 @@
+node_directories_to_create:
+- /home/ec2-user/packages
+- /home/ec2-user/config
+- /home/ec2-user/web
+

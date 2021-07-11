@@ -1,4 +1,12 @@
 ---
+- hosts: all
+  tasks:
+  - name: Create directories
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items: '{{ node_directories_to_create }}'
+    #    mode: '0755'
 - hosts: node2
   become: true
   gather_facts: no
