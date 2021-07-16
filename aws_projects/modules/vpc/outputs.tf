@@ -38,6 +38,14 @@ output "splunk_sg_id" {
   value = "${aws_security_group.splunk_sg.id}"
 }
 
+output "kafka_sg_id" {
+  value = "${aws_security_group.kafka_sg.id}"
+}
+
+output "zookeeper_sg_id" {
+  value = "${aws_security_group.zookeeper_sg.id}"
+}
+
 # output "nat_eip_id" {
 #   value = "${aws_eip.nat.id}"
 # }

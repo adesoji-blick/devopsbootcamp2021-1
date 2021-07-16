@@ -15,6 +15,7 @@ variable "installApp" {
   default = {
     "tools1"     = "../../scripts/install_tools1.sh"
     "baseline"     = "../../scripts/install_baseline.sh"
+    "baseline_tools"     = "../../scripts/install_baseline_tools.sh"
     "nginx"      = "../../scripts/install_nginx.sh"
     "apache"     = "../../scripts/install_apache.sh"
     "monitoring" = "../../scripts/install_monitoring.sh"

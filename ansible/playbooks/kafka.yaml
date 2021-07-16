@@ -35,19 +35,7 @@
     ansible.builtin.service:
       name: snapd
       state: started 
-  - name: Install lxd
-    become: true 
-    snap:
-      name:
-        - lxd
-      state: present
-  - name: Add the user 'jakeni' with a specific uid and a primary group of 'lxd'
-    become: true
-    ansible.builtin.user:
-      name: jakeni
-      comment: John Doe
-      group: lxd
-      state: present
+  
   - name: Add the user 'kafka' with a specific uid and a primary group of 'wheel'
     become: true
     ansible.builtin.user:
@@ -63,38 +51,49 @@
       home: /home/kafka  # Defaults to /home/<username>
       
   - name: Create Download directory if it does not exist
-#    become: true
+    become: true
     ansible.builtin.file:
-      path: /home/jakeni/kafka/
+      path: /home/kafka/Downloads
       state: directory
 #      mode: '0755'
   - name: Downloading and Extracting the Kafka Binaries (Download kafka_2.12-2.7.1.tgz)
-#    become: true
+    become: true
     get_url:
       url: https://downloads.apache.org/kafka/2.7.1/kafka_2.12-2.7.1.tgz
-      dest: /home/jakeni/Downloads/
-#      mode: '0777'
+      dest: /home/kafka/Downloads/kafka.tgz
+      mode: '0777'
 
   - name: Unarchive kafka_2.12-2.7.1.tgz that is already on the remote machine
-#    become: true
-    ansible.builtin.unarchive:
-      src: /home/jakeni/Downloads/kafka_2.12-2.7.1.tgz
-      dest: /home/jakeni/kafka
-      remote_src: yes
-  - name: Create directories
     become: true
-    file:
-      path: "{{ item }}"
-      state: directory
-    with_items: '{{ node_directories_to_create }}'
-#      mode: '0755'
-#  - name: Template file for Configuring the Kafka Server
+    ansible.builtin.unarchive:
+      src: /home/kafka/Downloads/kafka.tgz
+      dest: /home/kafka/
+      remote_src: yes
+      mode: '0777'
+
+
+  - name: Run command to rename folder.
+    become: true
+    command: mv /home/kafka/kafka_2.12-2.7.1 /home/kafka/kafka 
+    args:
+      chdir: /home/kafka/
+      creates: /home/kafka/kafka
+
+   
+#  - name:  Create directories
 #    become: true
-#    ansible.builtin.template:
-#      src: server.properties.j2
-#      dest: /home/kafka/config/server.properties
-#      owner: kafka 
-#      mode: '0644'
+#    file:
+#      path: "{{ item }}"
+#      state: directory
+#    with_items: '{{ node_directories_to_create }}'
+#      mode: '0755'
+##  - name: Template file for Configuring the Kafka Server
+##    become: true
+##    ansible.builtin.template:
+##      src: server.properties.j2
+##      dest: /home/kafka/config/server.properties
+##      owner: kafka 
+##      mode: '0644'
   - name: Template file for Creating Systemd Unit Files and Starting the zookeeper Server
     become: true
     ansible.builtin.template:
@@ -108,6 +107,11 @@
       dest: /etc/systemd/system/kafka.service    
       owner: root
 
+  - name: Enable and Start Kafka service, if not enabled
+    become: true
+    ansible.builtin.service:
+      name: kafka
+      state: reloaded
 
   - name: Enable and Start Kafka service, if not enabled
     become: true

@@ -23,7 +23,7 @@ build {
   ]
 
   provisioner "shell" {
-    script = "../scripts/install_monitoring.sh"
+    script = "../scripts/ubuntu_baseline.sh"
   }
 
 }

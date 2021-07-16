@@ -10,7 +10,7 @@ variable "instance_type" {
 variable "subnet_id" {}
 
 variable "my_key_name" {
-  default = "cloud1a"
+  default = "kafka"
 }
 
 variable "main_sg_id" {}

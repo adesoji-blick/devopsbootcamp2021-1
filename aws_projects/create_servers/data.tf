@@ -31,17 +31,17 @@ data "aws_ami" "amazon-linux" {
 }
 
 # ubuntu
-# data "aws_ami" "ubuntu" {
-#   filter {
-#     name   = "state"
-#     values = ["available"]
-#   }
+data "aws_ami" "ubuntu" {
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
 
-#   filter {
-#     name   = "tag:Name"
-#     values = ["task2-packer-ubuntu"]
-#   }
+  filter {
+    name   = "tag:Name"
+    values = ["task2-packer-ubuntu"]
+  }
 
-#   most_recent = true
-#   owners      = ["self"]
-# }
+  most_recent = true
+  owners      = ["self"]
+}
