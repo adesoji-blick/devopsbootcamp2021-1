@@ -66,6 +66,11 @@
       dest: /home/kafka/kafka/bin/kafka-server-start.sh
       owner: root
       mode: '0777'
+ 
+  - name: Install pip kafka-python
+    pip: 
+      name: kafka-python
+      state: present
 
 - hosts: zookeeper
   tasks:

@@ -5,6 +5,7 @@ install_common_packages:
 - wget
 - curl
 - unzip
+- pip
 - java-1.8.0-openjdk-devel-debug.x86_64
 packages_to_install:
 - git

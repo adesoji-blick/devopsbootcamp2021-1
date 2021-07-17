@@ -1,5 +1,5 @@
 [zookeeper]
-zookeeper_node_1       ansible_host=52.210.124.207  ansible_connection=ssh        ansible_user=ec2-user
+# zookeeper_node_1       ansible_host=52.210.124.207  ansible_connection=ssh        ansible_user=ec2-user
 [broker]
-broker_node_1       ansible_host=34.245.78.75  ansible_connection=ssh        ansible_user=ec2-user
+broker_node_1       ansible_host=34.240.243.244     ansible_connection=ssh        ansible_user=ec2-user
 
