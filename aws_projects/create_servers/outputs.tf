@@ -19,12 +19,12 @@ output "ubuntu_instance_public_dns" {
   #  depends_on  = []
 }
 
-# output "toolServer_instance_public_ip" {
-#   value = module.toolServer.instance_public_ip
-#   #  sensitive   = true
-#   description = "Public IP address of the EC2 instances"
-#   #  depends_on  = []
-# }
+output "kafka_instance_public_ip" {
+  value = module.kbrooker.instance_public_ip
+  #  sensitive   = true
+  description = "Public IP address of the EC2 instances"
+  #  depends_on  = []
+}
 
 # output "webServer_instance_public_ip" {
 #   value = module.webServer.instance_public_ip

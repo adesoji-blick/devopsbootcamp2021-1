@@ -19,6 +19,7 @@ variable "installApp" {
     "nginx"      = "../../scripts/install_nginx.sh"
     "apache"     = "../../scripts/install_apache.sh"
     "monitoring" = "../../scripts/install_monitoring.sh"
+    "ubuntu_baseline"       = "../../scripts/ubuntu_baseline.sh"
     "none"       = "../../scripts/install_none.sh"
   }
 }

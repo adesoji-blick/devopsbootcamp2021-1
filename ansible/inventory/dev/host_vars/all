@@ -1,5 +1,0 @@
-install_common_packages:
-- git
-- wget
-- curl
-
