@@ -1,5 +1,5 @@
-node_directories_to_create:
-- /home/kafka/config
+node_ip:
+- 3.249.209.153
 install_common_packages:
 - git
 - wget
