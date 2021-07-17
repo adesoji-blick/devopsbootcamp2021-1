@@ -1,0 +1,13 @@
+node_directories_to_create:
+- /home/kafka/config
+install_common_packages:
+- git
+- wget
+- curl
+- unzip
+- java-1.8.0-openjdk-devel-debug.x86_64
+packages_to_install:
+- git
+- java-1.8.0-openjdk-devel-debug.x86_64
+node_type: webserver
+node_env: dev

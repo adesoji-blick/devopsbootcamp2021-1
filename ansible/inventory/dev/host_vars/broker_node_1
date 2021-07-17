@@ -4,13 +4,8 @@ install_common_packages:
 - git
 - wget
 - curl
-- lxc
-- debootstrap 
-- perl 
-- libvirt
-- lxc-templates
-- snapd
 - unzip
+- java-1.8.0-openjdk-devel-debug.x86_64
 packages_to_install:
 - git
 - java-1.8.0-openjdk-devel-debug.x86_64

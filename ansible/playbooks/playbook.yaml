@@ -6,108 +6,90 @@
     yum: 
       name: "{{ item }}"
       state: installed
-    loop: '{{ install_common_packages }}'
-  - name: Template file for welcome_message
+    with_items: '{{ install_common_packages }}'
+  - name: Template
     become: true
-    ansible.builtin.template:
+    template:
       src: welcome_message.j2
       dest: /etc/profile.d/welcome_message.sh
       owner: root 
-      mode: '0644' 
-
-- hosts: db
-  tasks:
-  - name: Install MYSQL database
-    yum:
-      name:
-        - mariadb.x86_64
-      state: removed
-
-- hosts: web
-  tasks:
-  - name: Start service lxc, if not started
-    become: true
-    ansible.builtin.service:
-      name: lxc
-      state: started
-  - name: Enable service snapd, if not enabled
-    become: true
-    ansible.builtin.service:
-      name: snapd
-      state: started 
-  - name: Install lxd
-    become: true 
-    snap:
-      name:
-        - lxd
-      state: present
-  - name: Add the user 'jakeni' with a specific uid and a primary group of 'lxd'
-    become: true
-    ansible.builtin.user:
-      name: jakeni
-      comment: John Doe
-      group: lxd
-      state: present
-  - name: Add the user 'kafka' with a specific uid and a primary group of 'wheel'
-    become: true
-    ansible.builtin.user:
-      name: kafka
-#      password: 'kafka'
-      comment: Create Kafka user
-#      uid: 1040
-      group: wheel
-      state: present
-      shell: /bin/bash       # Defaults to /bin/bash
-      system: no             # Defaults to no
-      create_home: yes        # Defaults to yes
-      home: /home/kafka  # Defaults to /home/<username>
-      
+      mode: '0644'
   - name: Create Download directory if it does not exist
-#    become: true
-    ansible.builtin.file:
-      path: /home/jakeni/kafka/
+    become: true
+    file:
+      path: /home/kafka/Downloads
       state: directory
 #      mode: '0755'
   - name: Downloading and Extracting the Kafka Binaries (Download kafka_2.12-2.7.1.tgz)
-#    become: true
+    become: true
     get_url:
       url: https://downloads.apache.org/kafka/2.7.1/kafka_2.12-2.7.1.tgz
-      dest: /home/jakeni/Downloads/
-#      mode: '0777'
-
+      dest: /home/kafka/Downloads/kafka.tgz
+      mode: '0777'
+  
   - name: Unarchive kafka_2.12-2.7.1.tgz that is already on the remote machine
-#    become: true
-    ansible.builtin.unarchive:
-      src: /home/jakeni/Downloads/kafka_2.12-2.7.1.tgz
-      dest: /home/jakeni/kafka
-      remote_src: yes
-  - name: Create directories
     become: true
-    file:
-      path: "{{ item }}"
-      state: directory
-    with_items: '{{ node_directories_to_create }}'
-#      mode: '0755'
-#  - name: Template file for Configuring the Kafka Server
-#    become: true
-#    ansible.builtin.template:
-#      src: server.properties.j2
-#      dest: /home/kafka/config/server.properties
-#      owner: kafka 
-#      mode: '0644'
+    unarchive:
+      src: /home/kafka/Downloads/kafka.tgz 
+      dest: /home/kafka/
+      remote_src: yes
+      mode: '0777'
+
+
+  - name: Run command to rename folder.
+    become: true
+    command: mv /home/kafka/kafka_2.12-2.7.1 /home/kafka/kafka 
+    args:
+      chdir: /home/kafka/
+      creates: /home/kafka/kafka
+
   - name: Template file for Creating Systemd Unit Files and Starting the zookeeper Server
     become: true
     ansible.builtin.template:
       src: zookeeper.service.j2
       dest: /etc/systemd/system/zookeeper.service
       owner: root
+      mode: '0777'
+
   - name: Template file for Creating Systemd Unit Files and Starting the Kafka Server
     become: true
     ansible.builtin.template:
       src: kafka.service.j2
       dest: /etc/systemd/system/kafka.service    
       owner: root
+      mode: '0777'
 
+  - name: Template file for Creating kafka-server-start.sh  Files and Starting the Kafka Server
+    become: true
+    ansible.builtin.template:
+      src: kafka-server-start.j2
+      dest: /home/kafka/kafka/bin/kafka-server-start.sh
+      owner: root
+      mode: '0777'
+
+- hosts: zookeeper
+  tasks:
+
+  - name: Enable and Start zookeeper service, if not enabled
+    become: true
+    ansible.builtin.service:
+      name: zookeeper
+      enabled: yes
+
+  - name: Enable and Start zookeeper service, if not enabled
+    become: true
+    ansible.builtin.service:
+      name: zookeeper
+      state: started
+
+- hosts: broker
+  tasks:
+  
+  - name: Enable and Start Kafka service, if not enabled
+    become: true
+    ansible.builtin.service:
+      name: kafka
+      enabled: yes
 
   - name: Enable and Start Kafka service, if not enabled
     become: true
