@@ -26,6 +26,13 @@ output "kafka_instance_public_ip" {
   #  depends_on  = []
 }
 
+output "zookeeper_instance_public_ip" {
+  value = module.zookeeper.instance_public_ip
+  #  sensitive   = true
+  description = "Public IP address of the EC2 instances"
+  #  depends_on  = []
+}
+
 # output "webServer_instance_public_ip" {
 #   value = module.webServer.instance_public_ip
 #   #  sensitive   = true

@@ -13,14 +13,14 @@ variable "instance_type" {
 variable "installApp" {
   type = map(string)
   default = {
-    "tools1"     = "../../scripts/install_tools1.sh"
-    "baseline"     = "../../scripts/install_baseline.sh"
-    "baseline_tools"     = "../../scripts/install_baseline_tools.sh"
-    "nginx"      = "../../scripts/install_nginx.sh"
-    "apache"     = "../../scripts/install_apache.sh"
-    "monitoring" = "../../scripts/install_monitoring.sh"
-    "ubuntu_baseline"       = "../../scripts/ubuntu_baseline.sh"
-    "none"       = "../../scripts/install_none.sh"
+    "tools1"          = "../../scripts/install_tools1.sh"
+    "baseline"        = "../../scripts/install_baseline.sh"
+    "baseline_tools"  = "../../scripts/install_baseline_tools.sh"
+    "nginx"           = "../../scripts/install_nginx.sh"
+    "apache"          = "../../scripts/install_apache.sh"
+    "monitoring"      = "../../scripts/install_monitoring.sh"
+    "ubuntu_baseline" = "../../scripts/ubuntu_baseline.sh"
+    "none"            = "../../scripts/install_none.sh"
   }
 }
 
@@ -31,6 +31,10 @@ variable "private_instance_count" {
 variable "public_instance_count" {
   default = 1
 }
+
+variable "kbrooker_count" {}
+variable "zookeeper_count" {}
+
 
 variable "public_ubuntu_count" {}
 variable "web_instance_count" {}

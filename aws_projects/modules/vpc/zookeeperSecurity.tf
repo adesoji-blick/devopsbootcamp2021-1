@@ -10,6 +10,7 @@ resource "aws_security_group" "zookeeper_sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
+        description = "Zookeeper External Port"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
@@ -17,6 +18,7 @@ resource "aws_security_group" "zookeeper_sg" {
         from_port = 8080
         to_port = 8080
         protocol = "tcp"
+        description="JMX Exporter"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
@@ -24,6 +26,7 @@ resource "aws_security_group" "zookeeper_sg" {
         from_port = 8778
         to_port = 8778
         protocol = "tcp"
+        description="Jolokia Port"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
@@ -31,6 +34,7 @@ resource "aws_security_group" "zookeeper_sg" {
         from_port = 9999
         to_port = 9999
         protocol = "tcp"
+        description="JMX Port"
         cidr_blocks = ["0.0.0.0/0"]
     }
     
@@ -38,6 +42,7 @@ resource "aws_security_group" "zookeeper_sg" {
         from_port = 2888
         to_port = 2888
         protocol = "tcp"
+        description="Zookeeper Internal Port"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
@@ -45,6 +50,7 @@ resource "aws_security_group" "zookeeper_sg" {
         from_port = 3888
         to_port = 3888
         protocol = "tcp"
+        description="Zookeeper Internal Port"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
@@ -52,15 +58,16 @@ resource "aws_security_group" "zookeeper_sg" {
         from_port = 2181
         to_port = 2181
         protocol = "tcp"
+        description="Zookeeper External Port"
         cidr_blocks = ["0.0.0.0/0"]
     }
     
-    ingress {
-        from_port = -1
-        to_port = -1
-        protocol = "icmp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
+    # ingress {
+    #     from_port = -1
+    #     to_port = -1
+    #     protocol = "icmp"
+    #     cidr_blocks = ["0.0.0.0/0"]
+    # }
     egress {
         from_port=0
         to_port=0
